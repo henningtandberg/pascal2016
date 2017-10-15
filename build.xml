@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<project name="pascal2016" default="jar">
+
+  <target name="clean" description="Fjern genererte filer">
+    <delete dir="classes"/>
+    <delete file="pascal2016.jar"/>
+    <delete file="inf2100-oblig-2016.zip"/>
+    <delete> 
+      <fileset defaultexcludes="no" dir="." includes="**/*~"/> 
+    </delete>
+  </target>
+
+  <target name="compile" description="Kompiler Java-programmet">
+    <mkdir dir="classes"/>
+    <javac srcdir="." destdir="classes" debug="true"
+	   debuglevel="lines,vars,source" includeantruntime="false"/>
+  </target>
+
+  <target name="jar" depends="compile" description="Lag en JAR-fil">
+    <jar destfile="pascal2016.jar">
+      <fileset dir="classes" includes="**/*.class"/>
+      <manifest>
+	<attribute name="Main-Class" value="main.Main"/>
+      </manifest>
+    </jar>
+  </target>
+
+  <target name="zip" description="Lag en ZIP-fil">
+    <zip destfile="inf2100-oblig-2016.zip" basedir="."/>
+  </target>
+</project>
